@@ -56,9 +56,6 @@ class MusicDistro {
 
 			self::$instance = new MusicDistro;
 			self::$instance->setup_constants();
-
-			add_action( 'plugins_loaded', array( self::$instance, 'load_textdomain' ) );
-
 			self::$instance->includes();
 			self::$instance->roles = new MD_Roles();
 		}
@@ -124,3 +121,18 @@ class MusicDistro {
 		}
 	}
 }
+
+
+
+/**
+ * The main function that returns MusicDistro
+ *
+ * @since 0.1.0
+ * @return object|MusicDistro the instance of MusicDistro
+ */
+function MusicDistro() {
+	return MusicDistro::instance();
+}
+
+// get MusicDistro running
+MusicDistro();
