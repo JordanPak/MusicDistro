@@ -57,7 +57,7 @@ class MusicDistro {
 			self::$instance = new MusicDistro;
 			self::$instance->setup_constants();
 			self::$instance->includes();
-			self::$instance->roles = new MD_Roles();
+			// self::$instance->roles = new MD_Roles();
 		}
 
 		return self::$instance;
