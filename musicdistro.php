@@ -104,4 +104,23 @@ class MusicDistro {
 		// plugin root file
 		define( 'MD_PLUGIN_FILE', __FILE__ );
 	}
+
+
+
+	/**
+	 * Include required files.
+	 *
+	 * @since 0.1.0
+	 * @return void
+	 */
+	private function includes() {
+
+		// load every time
+
+
+		// if in admin
+		if ( is_admin() ) {
+
+		}
+	}
 }
