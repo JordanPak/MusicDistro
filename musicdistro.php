@@ -172,10 +172,6 @@ final class MusicDistro {
 		// global objects
 		$this->arrangement = new MusicDistro_Arrangement_Handler;
 
-		if ( is_admin() ) {
-
-		}
-
 		// hook now that all of the MusicDistro stuff is loaded
 		do_action( 'musicdistro_loaded' );
 	}
