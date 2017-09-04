@@ -43,10 +43,19 @@ final class MusicDistro {
 	/**
 	 * Plugin version for enqueueing, etc.
 	 *
-	 * @since 1.0.0
 	 * @var string
+	 * @since 1.0.0
 	 */
 	public $version = '1.0.0';
+
+
+	/**
+	 * Custom post type prefix
+	 *
+	 * @var string
+	 * @since 1.0.0
+	 */
+	public $cpt_prefix = 'md_';
 
 
 	/**
@@ -114,6 +123,11 @@ final class MusicDistro {
 		// plugin root file
 		if ( ! defined( 'MD_PLUGIN_FILE' ) ) {
 			define( 'MD_PLUGIN_FILE', __FILE__ );
+		}
+
+		// custom post type prefix
+		if ( ! defined( 'MD_CPT_PREFIX' ) ) {
+			define( 'MD_CPT_PREFIX', $this->cpt_prefix );
 		}
 	}
 

@@ -13,6 +13,15 @@
 class MusicDistro_Arrangement_Handler {
 
     /**
+     * Custom post type slug
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    const CPT_SLUG = MD_CPT_PREFIX . 'arrangement';
+
+
+    /**
      * Primary class constructor.
      *
      * @since 1.0.0
