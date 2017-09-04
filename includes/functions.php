@@ -7,5 +7,5 @@
  * @author     JordanPak
  * @since      1.0.0
  * @license    GPL-3.0+
- * @copyright  Copyright (c) 2017, Jordan Pakrosnis
+ * @copyright  Copyright (c) 2017, Jordan Pakrosnis / JpakMedia LLC
  */
