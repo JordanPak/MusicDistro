@@ -43,7 +43,7 @@ class MusicDistro_Arrangement_Handler {
         $labels = array(
             'name'                  => _x( 'Arrangements', 'Post Type General Name', 'musicdistro' ),
             'singular_name'         => _x( 'Arrangement', 'Post Type Singular Name', 'musicdistro' ),
-            'menu_name'             => __( 'Arrangements', 'musicdistro' ),
+            'menu_name'             => __( 'MusicDistro', 'musicdistro' ),
             'name_admin_bar'        => __( 'Arrangement', 'musicdistro' ),
             'archives'              => __( 'Arrangement Archives', 'musicdistro' ),
             'attributes'            => __( 'Arrangement Attributes', 'musicdistro' ),
@@ -94,7 +94,7 @@ class MusicDistro_Arrangement_Handler {
                 'show_ui'               => true,
                 'show_in_menu'          => true,
                 'menu_position'         => 5,
-                'menu_icon'             => 'dashicons-download',
+                'menu_icon'             => 'dashicons-media-audio',
                 'show_in_admin_bar'     => true,
                 'show_in_nav_menus'     => false,
                 'can_export'            => true,
