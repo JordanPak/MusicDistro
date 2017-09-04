@@ -115,11 +115,22 @@ final class MusicDistro {
 	private function includes() {
 
 		// load every time
+		$includes = array(
+			'functions',
+			'class-arrangement',
+		);
 
 
 		// if in admin
 		if ( is_admin() ) {
+			$includes = array_merge( $includes, array(
+				'admin/admin.php',
+			));
+		}
 
+		// include stuff
+		foreach ( $includes as $include ) {
+			require_once MD_PLUGIN_DIR . 'includes/' . $include . '.php';
 		}
 	}
 }
