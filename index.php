@@ -1,0 +1,1 @@
+<?php // a rest is silence
