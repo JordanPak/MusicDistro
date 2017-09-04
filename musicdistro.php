@@ -1,19 +1,23 @@
 <?php
 /**
- * Crunchy Tech
- *
- * @package     musicdistro
- * @author      Jordan Pakrosnis
- * @copyright   2017 JordanPak
- *
- * @wordpress-plugin
  * Plugin Name: MusicDistro
  * Plugin URI:  https://jordanpak.com
  * Description: Enables bands to distribute sheet music and other tools to its members!
- * Version:     1.0.0
  * Author:      Jordan Pakrosnis
  * Author URI:  https://jordanpak.com
+ * Version:     1.0.0
  * Text Domain: musicdistro
+ *
+ * MusicDistro is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * @package    MusicDistro
+ * @author     Jordan Pakrosnis
+ * @since      1.0.0
+ * @license    GPL-3.0+
+ * @copyright  Copyright (c) 2017, Jordan Pakrosnis / JpakMedia LLC.
  */
 
 // Exit if accessed directly
