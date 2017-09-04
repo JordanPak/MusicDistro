@@ -124,7 +124,7 @@ final class MusicDistro {
 		// if in admin
 		if ( is_admin() ) {
 			$includes = array_merge( $includes, array(
-				'admin/admin.php',
+				'admin/admin',
 			));
 		}
 
