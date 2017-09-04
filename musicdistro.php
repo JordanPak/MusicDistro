@@ -109,8 +109,7 @@ final class MusicDistro {
 	/**
 	 * Include required files.
 	 *
-	 * @since 0.1.0
-	 * @return void
+	 * @since 1.0.0
 	 */
 	private function includes() {
 
@@ -133,6 +132,26 @@ final class MusicDistro {
 			require_once MD_PLUGIN_DIR . 'includes/' . $include . '.php';
 		}
 	}
+
+
+
+	/**
+	 * Setup objects.
+	 *
+	 * @since 1.0.0
+	 */
+	public function objects() {
+
+		// global objects
+		// $this->
+
+		if ( is_admin() ) {
+
+		}
+
+		// hook now that all of the MusicDistro stuff is loaded
+		do_action( 'musicdistro_loaded' );
+	}
 }
 
 
@@ -140,8 +159,8 @@ final class MusicDistro {
 /**
  * The main function that returns MusicDistro
  *
- * @since 0.1.0
- * @return object|MusicDistro the instance of MusicDistro
+ * @since 1.0.0
+ * @return object
  */
 function MusicDistro() {
 	return MusicDistro::instance();
