@@ -68,6 +68,15 @@ final class MusicDistro {
 
 
 	/**
+	 * The band tax handler instance
+	 *
+	 * @var object MusicDistro_Band_Handler
+	 * @since 1.0.0
+	 */
+	public $band;
+
+
+	/**
 	 * @var object|MD_Roles
 	 * @since 1.0.0
 	 */
@@ -144,6 +153,7 @@ final class MusicDistro {
 		$includes = array(
 			'functions',
 			'class-arrangement',
+			'class-band',
 		);
 
 
@@ -171,6 +181,7 @@ final class MusicDistro {
 
 		// global objects
 		$this->arrangement = new MusicDistro_Arrangement_Handler;
+		$this->band        = new MusicDistro_Band_Handler;
 
 		// hook now that all of the MusicDistro stuff is loaded
 		do_action( 'musicdistro_loaded' );
