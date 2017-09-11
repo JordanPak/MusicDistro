@@ -27,9 +27,8 @@ class MusicDistro_Arrangement_Handler {
      * @since 1.0.0
      */
     public function __construct() {
-
-        // register arrangement custom post type
-        $this->register_cpt();
+        add_action( 'init'      , array( $this, 'register_cpt' ) );
+        add_action( 'admin_menu', array( $this, 'edit_admin_menu' ) );
     }
 
 
@@ -48,7 +47,7 @@ class MusicDistro_Arrangement_Handler {
             'archives'              => __( 'Arrangement Archives', 'musicdistro' ),
             'attributes'            => __( 'Arrangement Attributes', 'musicdistro' ),
             'parent_item_colon'     => __( 'Parent Arrangement:', 'musicdistro' ),
-            'all_items'             => __( 'All Arrangements', 'musicdistro' ),
+            'all_items'             => __( 'Arrangements', 'musicdistro' ),
             'add_new_item'          => __( 'Add New Arrangement', 'musicdistro' ),
             'add_new'               => __( 'Add New', 'musicdistro' ),
             'new_item'              => __( 'New Arrangement', 'musicdistro' ),
@@ -87,7 +86,7 @@ class MusicDistro_Arrangement_Handler {
                 'label'                 => __( 'Arrangement', 'musicdistro' ),
                 'description'           => __( 'A single arrangement for a band to use: Sheet music, tempo, recording, etc.', 'musicdistro' ),
                 'labels'                => $labels,
-                'supports'              => array( 'title', ),
+                'supports'              => array( 'title' ),
                 // 'taxonomies'            => array( 'MD_BANDS_KILL', ' MD_ARRANGEMENT_TYPE_KILL' ),
                 'hierarchical'          => false,
                 'public'                => true,
@@ -110,4 +109,19 @@ class MusicDistro_Arrangement_Handler {
         register_post_type( $this->cpt_slug, $args );
     }
 
+
+
+    /**
+     * Edit admin menu
+     *
+     * Remove "Add New" link
+     *
+     * @since 1.0.0
+     */
+    public function edit_admin_menu() {
+
+        global $submenu;
+
+        unset( $submenu['edit.php?post_type=' . $this->cpt_slug ][10] );
+    }
 }
