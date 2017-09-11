@@ -16,7 +16,7 @@ class MusicDistro_Band_Handler {
      * @var string
      * @since 1.0.0
      */
-    public $cpt_slug = MD_CPT_PREFIX . 'band';
+    public $tax_slug = MD_CPT_PREFIX . 'band';
 
 
     /**
