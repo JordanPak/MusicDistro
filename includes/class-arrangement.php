@@ -87,7 +87,6 @@ class MusicDistro_Arrangement_Handler {
                 'description'           => __( 'A single arrangement for a band to use: Sheet music, tempo, recording, etc.', 'musicdistro' ),
                 'labels'                => $labels,
                 'supports'              => array( 'title' ),
-                // 'taxonomies'            => array( 'MD_BANDS_KILL', ' MD_ARRANGEMENT_TYPE_KILL' ),
                 'hierarchical'          => false,
                 'public'                => true,
                 'show_ui'               => true,
