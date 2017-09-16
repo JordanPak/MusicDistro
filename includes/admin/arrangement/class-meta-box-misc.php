@@ -1,6 +1,7 @@
 <?php
 /**
- * Bands & parts arrangement meta box
+ * Meta box for tempo, recording file, score,
+ * and other misc. arrangement options
  *
  * @package    MusicDistro
  * @author     Jordan Pakrosnis
@@ -8,7 +9,7 @@
  * @license    GPL-3.0+
  * @copyright  Copyright (c) 2017, Jordan Pakrosnis / JpakMedia LLC
 */
-class MusicDistro_Meta_Box_Bands_Parts {
+class MusicDistro_Meta_Box_Misc {
 
 	/**
 	 * Custom post type slug
@@ -37,11 +38,11 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	public function add_meta_box() {
 	
 		add_meta_box(
-			'musicdistro_bands_parts',				// ID
-			__( 'Bands & Parts', 'musicdistro' ),	// title
-			array( $this, 'render_meta_box' ),		// callback
-			MusicDistro()->arrrangement->cpt_slug,	// post type
-			'normal', 'high'						// position / priority
+			'musicdistro_misc',     				    // ID
+			__( 'Arrangement Options', 'musicdistro' ),	// title
+			array( $this, 'render_meta_box' ),	    	// callback
+			MusicDistro()->arrrangement->cpt_slug,  	// post type
+			'side'					                   	// position
 		);
 	}
 

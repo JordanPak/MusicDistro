@@ -164,6 +164,7 @@ final class MusicDistro {
 				'admin/admin',
 				// 'admin/arrangement/class-arrangement-meta-boxes',
 				'admin/arrangement/class-meta-box-bands-parts',
+				'admin/arrangement/class-meta-box-misc',
 			));
 		}
 
@@ -191,6 +192,7 @@ final class MusicDistro {
 		if ( is_admin() ) {
 			// new MusicDistro_Arrangement_Meta_Boxes;
 			new MusicDistro_Meta_Box_Bands_Parts;
+			new MusicDistro_Meta_Box_Misc;
 		}
 
 		// hook now that all of the MusicDistro stuff is loaded
