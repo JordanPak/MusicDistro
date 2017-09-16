@@ -37,12 +37,14 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 * @since 1.0.0
 	 */
 	public function add_meta_box() {
+
+		$screen = MusicDistro()->arrangement->cpt_slug;
 	
 		add_meta_box(
 			'musicdistro_bands_parts',				// ID
 			__( 'Bands & Parts', 'musicdistro' ),	// title
 			array( $this, 'render_meta_box' ),		// callback
-			MusicDistro()->arrrangement->cpt_slug,	// post type
+			$screen,								// post type
 			'normal', 'high'						// position / priority
 		);
 	}
