@@ -18,12 +18,14 @@
  * @return boolean
  */
 function musicdistro_is_admin_page() {
-    d( get_post_type( get_the_ID()) );
-    if ( ! is_admin() ) {
-        return false;
+
+    $post_type = get_post_type();
+
+    if ( is_admin() && $post_type == MusicDistro()->arrangement->cpt_slug ) {
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 
