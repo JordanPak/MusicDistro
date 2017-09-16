@@ -74,6 +74,21 @@ class MusicDistro_Meta_Box_Bands_Parts {
 
 
 	/**
+	 * Get the list of bands/parts fields (without md_ prefix)
+	 *
+	 * @return array  $fields
+	 * @since 1.0.0
+	 */
+	private function get_field_list() {
+
+		return apply_filters( 'musicdistro_bands_parts_field_list', array(
+			'bands',
+		));
+	}
+
+
+
+	/**
 	 * Render the bands field
 	 *
 	 * @param integer  $post_id  current post ID
@@ -131,8 +146,30 @@ class MusicDistro_Meta_Box_Bands_Parts {
 			return;
 		}
 
-		
+		// don't do on autosave, ajax, or bulk edit
+		if ( MD_DOING_AUTOSAVE || MD_DOING_AJAX || isset( $_REQUEST['bulk_edit'] ) ) {
+			return;
+		}
 
+		// skip revaisions
+		if ( isset( $post->post_type ) && 'revision' == $post->post_type ) {
+			return;
+		}
+
+		// @todo make this work
+		// if ( ! current_user_can( 'edit_arrangement', $post_id ) ) {
+		// 	return;
+		// }
+
+		// default fields that get saved
+		$fields = $this->get_field_list();
+
+
+		foreach ( $fields as $field ) {
+
+		}
+
+		d( 'MADE IT!' );
 		die();
 	}
 }

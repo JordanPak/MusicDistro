@@ -138,6 +138,16 @@ final class MusicDistro {
 		if ( ! defined( 'MD_CPT_PREFIX' ) ) {
 			define( 'MD_CPT_PREFIX', $this->cpt_prefix );
 		}
+
+		// doing autosave?
+		if ( ! defined( 'MD_DOING_AUTOSAVE' ) ) {
+			define( 'MD_DOING_AUTOSAVE', ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) );
+		}
+
+		// doing ajax?
+		if ( ! defined( 'MD_DOING_AJAX' ) ) {
+			define( 'MD_DOING_AJAX', ( defined( 'DOING_AJAX' ) && DOING_AJAX ) );
+		}
 	}
 
 
