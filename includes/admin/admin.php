@@ -19,13 +19,13 @@
  */
 function musicdistro_is_admin_page() {
 
-    $post_type = get_post_type();
+	$post_type = get_post_type();
 
-    if ( is_admin() && $post_type == MusicDistro()->arrangement->cpt_slug ) {
-        return true;
-    }
+	if ( is_admin() && $post_type == MusicDistro()->arrangement->cpt_slug ) {
+		return true;
+	}
 
-    return false;
+	return false;
 }
 
 
@@ -37,33 +37,19 @@ function musicdistro_is_admin_page() {
  */
 function musicdistro_admin_scripts() {
 
-    if ( ! musicdistro_is_admin_page() ) {
-        return;
-    }
+	if ( ! musicdistro_is_admin_page() ) {
+		return;
+	}
 
-    wp_enqueue_media();
+	wp_enqueue_media();
 
+	// main scripts and styles
+	wp_enqueue_script( 'musicdistro-admin', MD_PLUGIN_URL . 'assets/js/admin.min.js', array( 'jquery' ), MD_VERSION, true );
+	wp_enqueue_style( 'musicdistro-admin' , MD_PLUGIN_URL . 'assets/css/admin.min.css', array( 'select2' ) );
 
-    $dir    = ( defined( 'MD_DEVELOPMENT' ) && MD_DEVELOPMENT ) ? '/src' : '';
-    $suffix = ( defined( 'MD_DEVELOPMENT' ) && MD_DEVELOPMENT ) ? '' : '.min';
-
-    // main admin scripts
-    wp_enqueue_script(
-        'musicdistro-admin',
-        MD_PLUGIN_URL . "assets/js{$dir}/admin{$suffix}.js",
-        array( 'jquery' ),
-        MD_VERSION,
-        true
-    );
-
-    // select2
-    wp_enqueue_script(
-        'select2',
-        'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
-        array( 'jquery' ),
-        false, true
-    );
-    wp_enqueue_style( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' );
+	// select2
+	wp_enqueue_script( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js', array( 'jquery' ), false, true );
+	wp_enqueue_style( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' );
 }
 
 add_action( 'admin_enqueue_scripts', 'musicdistro_admin_scripts' );
