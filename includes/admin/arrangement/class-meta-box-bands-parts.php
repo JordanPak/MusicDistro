@@ -11,12 +11,12 @@
 class MusicDistro_Meta_Box_Bands_Parts {
 
 	/**
-	 * Custom post type slug
+	 * Nonce name
 	 *
 	 * @var string
 	 * @since 1.0.0
 	 */
-	// public $cpt_slug = MD_CPT_PREFIX . 'arrangement';
+	private $nonce = 'musicdistro_meta_box_bands_parts_nonce';
 
 
 	/**
@@ -25,9 +25,10 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+		add_action( 'add_meta_boxes',                          array( $this, 'add_meta_box' ) );
 		add_action( 'musicdistro_meta_box_bands_parts_fields', array( $this, 'render_bands_field' ) );
 		add_action( 'musicdistro_meta_box_bands_parts_fields', array( $this, 'render_parts_fields' ) );
+		add_action( 'save_post',                               array( $this, 'save_meta_box' ), 10, 2 );
 	}
 
 
@@ -67,7 +68,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 		do_action( 'musicdistro_meta_box_bands_parts_fields', $post->ID );
 
 		// set nonce
-		wp_nonce_field( basename( __FILE__ ), 'musicdistro_meta_box_bands_parts_nonce' );
+		wp_nonce_field( basename( __FILE__ ), $this->nonce );
 	}
 
 
@@ -105,10 +106,33 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	/**
 	 * Render the parts fields
 	 *
-	 * @param integer  $post_id  current post ID
+	 * @param int  $post_id  current post ID
 	 * @since 1.0.0
 	 */
 	public function render_parts_fields( $post_id ) {
 		d( $post_id );
+	}
+
+
+
+	/**
+	 * Save the fields
+	 *
+	 * @param int     $post_id  Arrangement post ID
+	 * @param object  $post     arrangement post
+	 * @since 1.0.0
+	 */
+	public function save_meta_box( $post_id, $post ) {
+		
+		d( $post_id, $post );
+
+		// check nonce
+		if ( ! isset( $_POST[ $this->nonce ] ) || ! wp_verify_nonce( $_POST[ $this->nonce ], basename( __FILE__ ) ) ) {
+			return;
+		}
+
+		
+
+		die();
 	}
 }
