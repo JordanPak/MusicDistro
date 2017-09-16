@@ -18,7 +18,7 @@
  * @return boolean
  */
 function musicdistro_is_admin_page() {
-
+    d( get_post_type( get_the_ID()) );
     if ( ! is_admin() ) {
         return false;
     }
@@ -62,7 +62,6 @@ function musicdistro_admin_scripts() {
         false, true
     );
     wp_enqueue_style( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' );
-
 }
 
 add_action( 'admin_enqueue_scripts', 'musicdistro_admin_scripts' );

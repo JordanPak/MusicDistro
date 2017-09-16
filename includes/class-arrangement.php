@@ -69,15 +69,15 @@ class MusicDistro_Arrangement_Handler {
             'filter_items_list'     => __( 'Filter arrangements list', 'musicdistro' ),
         );
 
-        $capabilities = array(
-            'edit_post'             => 'edit_post',
-            'read_post'             => 'read_post',
-            'delete_post'           => 'delete_post',
-            'edit_posts'            => 'edit_posts',
-            'edit_others_posts'     => 'edit_others_posts',
-            'publish_posts'         => 'publish_posts',
-            'read_private_posts'    => 'read_private_posts',
-        );
+        // $capabilities = array(
+        //     'edit_post'             => 'edit_post',
+        //     'read_post'             => 'read_post',
+        //     'delete_post'           => 'delete_post',
+        //     'edit_posts'            => 'edit_posts',
+        //     'edit_others_posts'     => 'edit_others_posts',
+        //     'publish_posts'         => 'publish_posts',
+        //     'read_private_posts'    => 'read_private_posts',
+        // );
 
 
         // CPT arguments, filterable if needed
@@ -100,7 +100,7 @@ class MusicDistro_Arrangement_Handler {
                 'exclude_from_search'   => true,
                 'publicly_queryable'    => true,
                 'rewrite'               => false,
-                'capabilities'          => $capabilities,
+                // 'capabilities'          => $capabilities,
                 'show_in_rest'          => true,
             )
         );
