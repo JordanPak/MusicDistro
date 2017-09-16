@@ -162,7 +162,8 @@ final class MusicDistro {
 		if ( is_admin() ) {
 			$includes = array_merge( $includes, array(
 				'admin/admin',
-				'admin/arrangement/meta-box',
+				// 'admin/arrangement/class-arrangement-meta-boxes',
+				'admin/arrangement/class-meta-box-bands-parts',
 			));
 		}
 
@@ -185,6 +186,12 @@ final class MusicDistro {
 		$this->arrangement = new MusicDistro_Arrangement_Handler;
 		$this->band        = new MusicDistro_Band_Handler;
 		// $this->instrument  = new MusicDistro_Instrument_Handler;
+
+		// admin objects
+		if ( is_admin() ) {
+			// new MusicDistro_Arrangement_Meta_Boxes;
+			new MusicDistro_Meta_Box_Bands_Parts;
+		}
 
 		// hook now that all of the MusicDistro stuff is loaded
 		do_action( 'musicdistro_loaded' );
