@@ -162,6 +162,7 @@ final class MusicDistro {
 		if ( is_admin() ) {
 			$includes = array_merge( $includes, array(
 				'admin/admin',
+				'admin/arrangement/meta-box',
 			));
 		}
 
