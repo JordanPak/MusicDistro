@@ -26,7 +26,7 @@ class MusicDistro_Meta_Box_Misc {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+        add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 	}
 
 
@@ -54,6 +54,15 @@ class MusicDistro_Meta_Box_Misc {
 	 * @since 1.0.0
 	 */
 	public function render_meta_box( $post ) {
-		d( $post );
+        
+        /**
+         * Output the fields
+         *
+         * @since 1.0.0
+         */
+        // do_action( 'musicdistro_meta_box_misc_fields', $post->ID );
+
+        // set nonce
+        // wp_nonce_field( basename( __FILE__ ), 'musicdistro_meta_box_misc_nonce' );
 	}
 }

@@ -26,6 +26,8 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 */
 	public function __construct() {
 		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+		add_action( 'musicdistro_meta_box_bands_parts_fields', array( $this, 'render_bands_field' ) );
+		add_action( 'musicdistro_meta_box_bands_parts_fields', array( $this, 'render_parts_fields' ) );
 	}
 
 
@@ -46,6 +48,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	}
 
 
+
 	/**
 	 * Render the meta box
 	 *
@@ -53,6 +56,39 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 * @since 1.0.0
 	 */
 	public function render_meta_box( $post ) {
-		d( $post );
+		
+		/**
+		 * Output the fields
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'musicdistro_meta_box_bands_parts_fields', $post->ID );
+
+		// set nonce
+		wp_nonce_field( basename( __FILE__ ), 'musicdistro_meta_box_bands_parts_nonce' );
+	}
+
+
+
+	/**
+	 * Render the bands field
+	 *
+	 * @param integer  $post_id  current post ID
+	 * @since 1.0.0
+	 */
+	public function render_bands_field( $post_id ) {
+		d( $post_id );
+	}
+
+
+
+	/**
+	 * Render the parts fields
+	 *
+	 * @param integer  $post_id  current post ID
+	 * @since 1.0.0
+	 */
+	public function render_parts_fields( $post_id ) {
+		d( $post_id );
 	}
 }
