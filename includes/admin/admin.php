@@ -51,8 +51,18 @@ function musicdistro_admin_scripts() {
         MD_PLUGIN_URL . "assets/js{$dir}/admin{$suffix}.js",
         array( 'jquery' ),
         MD_VERSION,
-        false
+        true
     );
+
+    // select2
+    wp_enqueue_script(
+        'select2',
+        'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+        array( 'jquery' ),
+        false, true
+    );
+    wp_enqueue_style( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' );
+
 }
 
 add_action( 'admin_enqueue_scripts', 'musicdistro_admin_scripts' );
