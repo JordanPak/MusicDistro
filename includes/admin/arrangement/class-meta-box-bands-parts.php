@@ -79,8 +79,26 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 * @since 1.0.0
 	 */
 	public function render_bands_field( $post_id ) {
-		d( $post_id );
-	}
+
+		// get bands
+		$tax      = MusicDistro()->band->tax_slug;
+		$bands    = get_terms( array( 'taxonomy' => $tax, 'hide_empty' => false ) );
+		$selected = get_the_terms( $post_id, $tax );
+		$selected = wp_get_post_terms( $post_id, $tax, array( 'fields' => 'ids' ) );
+		$selected = $selected ?: array();
+
+		// build options
+		foreach ( $bands as $i => $band ) {
+			$is_selected = in_array( $band->term_id, $selected ) ? ' selected="selected"' : '';
+			$bands[ $i ] = "<option value='{$band->term_id}'$is_selected>{$band->name}</option>";
+		}
+		?>
+
+		<p><label for="md_bands">Bands</label><br />
+			<select id="md_bands" name="md_bands[]" multiple="multiple"><?php echo implode( '', $bands ); ?></select>
+		</p>
+
+	<?php }
 
 
 

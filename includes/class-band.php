@@ -80,7 +80,7 @@ class MusicDistro_Band_Handler {
         );
 
         register_taxonomy(
-            MD_CPT_PREFIX . $this->tax_slug,
+            $this->tax_slug,
             array( MusicDistro()->arrangement->cpt_slug ),
             $args
         );
