@@ -77,15 +77,6 @@ final class MusicDistro {
 
 
 	/**
-	 * The instrument tax handler instance
-	 *
-	 * @var object MusicDistro_Instrument_Handler
-	 * @since 1.0.0
-	 */
-	public $instrument;
-
-
-	/**
 	 * @var object|MD_Roles
 	 * @since 1.0.0
 	 */
@@ -163,7 +154,7 @@ final class MusicDistro {
 			'functions',
 			'class-arrangement',
 			'class-band',
-			'class-instrument',
+			// 'class-instrument',
 		);
 
 
@@ -192,7 +183,7 @@ final class MusicDistro {
 		// global objects
 		$this->arrangement = new MusicDistro_Arrangement_Handler;
 		$this->band        = new MusicDistro_Band_Handler;
-		$this->instrument  = new MusicDistro_Instrument_Handler;
+		// $this->instrument  = new MusicDistro_Instrument_Handler;
 
 		// hook now that all of the MusicDistro stuff is loaded
 		do_action( 'musicdistro_loaded' );
