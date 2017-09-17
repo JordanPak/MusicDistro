@@ -177,7 +177,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 			$meta_name = $prefix . $field;
 			
 			// check if something was put in
-			if ( ! empty( $_POST[ $meta_name ] ) ) {
+			// if ( ! empty( $_POST[ $meta_name ] ) ) {
 				d( $_POST[ $meta_name ] );
 				
 				do_action( 'musicdistro_meta_box_save_' . $field, $post_id, $_POST[ $meta_name ] );
@@ -186,12 +186,12 @@ class MusicDistro_Meta_Box_Bands_Parts {
 				// $new = apply_filters( 'musicdistro_meta_box_save_' . $field, $_POST[ $meta_name ] );
 				// set meta
 				// update_post_meta( $post_id, $meta_name, $new );
-			}
+			// }
 
 			// delete if nothing
-			else {
-				delete_post_meta( $post_id, $meta_name );
-			}
+			// else {
+			// 	delete_post_meta( $post_id, $meta_name );
+			// }
 		}
 
 
@@ -208,6 +208,9 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 * @since 1.0.0
 	 */
 	public function save_field_bands( $post_id, $bands ) {
+
+		// set to empty array of none entered
+		$bands = $bands ?: array();
 
 		// change term IDs to ints & sanitize
 		$bands = array_map( 'intval', $bands );

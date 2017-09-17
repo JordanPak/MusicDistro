@@ -42,14 +42,14 @@ function musicdistro_admin_scripts() {
 	}
 
 	wp_enqueue_media();
-
-	// main scripts and styles
-	wp_enqueue_script( 'musicdistro-admin', MD_PLUGIN_URL . 'assets/js/admin.min.js', array( 'jquery' ), MD_VERSION, true );
-	wp_enqueue_style( 'musicdistro-admin' , MD_PLUGIN_URL . 'assets/css/admin.min.css', array( 'select2' ) );
-
+	
 	// select2
 	wp_enqueue_script( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js', array( 'jquery' ), false, true );
 	wp_enqueue_style( 'select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css' );
+
+	// main scripts and styles
+	wp_enqueue_script( 'musicdistro-admin', MD_PLUGIN_URL . 'assets/js/admin.min.js', array( 'jquery', 'select2' ), MD_VERSION, true );
+	wp_enqueue_style( 'musicdistro-admin' , MD_PLUGIN_URL . 'assets/css/admin.min.css', array( 'select2' ) );
 }
 
 add_action( 'admin_enqueue_scripts', 'musicdistro_admin_scripts' );
