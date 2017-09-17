@@ -28,7 +28,8 @@ class MusicDistro_Meta_Box_Bands_Parts {
 		add_action( 'add_meta_boxes',                          array( $this, 'add_meta_box' ) );
 		add_action( 'musicdistro_meta_box_bands_parts_fields', array( $this, 'render_bands_field' ) );
 		add_action( 'musicdistro_meta_box_bands_parts_fields', array( $this, 'render_parts_fields' ) );
-		add_action( 'save_post',                               array( $this, 'save_meta_box' ), 10, 2 );
+		add_action( 'save_post',                               array( $this, 'save_meta_box' ),    10, 2 );
+		add_action( 'musicdistro_meta_box_save_bands',         array( $this, 'save_field_bands' ), 10, 2 );
 	}
 
 
@@ -80,6 +81,8 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 * @since 1.0.0
 	 */
 	private function get_field_list() {
+
+		// $prefix = MusicDistro()->cpt_prefix;
 
 		return apply_filters( 'musicdistro_bands_parts_field_list', array(
 			'bands',
@@ -139,7 +142,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 */
 	public function save_meta_box( $post_id, $post ) {
 		
-		d( $post_id, $post );
+		d( $post_id, $post, $_POST );
 
 		// check nonce
 		if ( ! isset( $_POST[ $this->nonce ] ) || ! wp_verify_nonce( $_POST[ $this->nonce ], basename( __FILE__ ) ) ) {
@@ -161,15 +164,55 @@ class MusicDistro_Meta_Box_Bands_Parts {
 		// 	return;
 		// }
 
-		// default fields that get saved
+		// get default field list & meta prefix
+		$prefix = MusicDistro()->cpt_prefix;
 		$fields = $this->get_field_list();
 
-
+		/**
+		 * Field save loop
+		 */
 		foreach ( $fields as $field ) {
 
+			// prefixed field name
+			$meta_name = $prefix . $field;
+			
+			// check if something was put in
+			if ( ! empty( $_POST[ $meta_name ] ) ) {
+				d( $_POST[ $meta_name ] );
+				
+				do_action( 'musicdistro_meta_box_save_' . $field, $post_id, $_POST[ $meta_name ] );
+
+				// sanitize and stuff
+				// $new = apply_filters( 'musicdistro_meta_box_save_' . $field, $_POST[ $meta_name ] );
+				// set meta
+				// update_post_meta( $post_id, $meta_name, $new );
+			}
+
+			// delete if nothing
+			else {
+				delete_post_meta( $post_id, $meta_name );
+			}
 		}
+
 
 		d( 'MADE IT!' );
 		die();
+	}
+
+
+
+	/**
+	 * Save bands field
+	 *
+	 * @param array  $bands  selected band term IDs
+	 * @since 1.0.0
+	 */
+	public function save_field_bands( $post_id, $bands ) {
+
+		// change term IDs to ints & sanitize
+		$bands = array_map( 'intval', $bands );
+
+		// add what we want
+		$chicken = wp_set_object_terms( $post_id, $bands, MusicDistro()->band->tax_slug );
 	}
 }
