@@ -102,7 +102,6 @@ class MusicDistro_Meta_Box_Bands_Parts {
 		// get bands
 		$tax      = MusicDistro()->band->tax_slug;
 		$bands    = get_terms( array( 'taxonomy' => $tax, 'hide_empty' => false ) );
-		$selected = get_the_terms( $post_id, $tax );
 		$selected = wp_get_post_terms( $post_id, $tax, array( 'fields' => 'ids' ) );
 		$selected = $selected ?: array();
 
@@ -113,7 +112,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 		}
 		?>
 
-		<p><label for="md_bands">Bands</label><br />
+		<p><label for="md_bands"><?php echo  __( 'Bands', 'musicdistro' ); ?></label><br />
 			<select id="md_bands" name="md_bands[]" multiple="multiple"><?php echo implode( '', $bands ); ?></select>
 		</p>
 
