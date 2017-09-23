@@ -131,7 +131,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 * @since 1.0.0
 	 */
 	public function render_parts_fields( $post_id ) {
-		d( $post_id );
+		// d( $post_id );
 	}
 
 
