@@ -101,7 +101,11 @@ class MusicDistro_Meta_Box_Bands_Parts {
 
 		// get bands
 		$tax      = MusicDistro()->band->tax_slug;
-		$bands    = get_terms( array( 'taxonomy' => $tax, 'hide_empty' => false ) );
+		$bands    = get_terms( array(
+			'taxonomy'		=> $tax,
+			'hide_empty'	=> false,
+			'parent'		=> 0, 
+		));
 		$selected = wp_get_post_terms( $post_id, $tax, array( 'fields' => 'ids' ) );
 		$selected = $selected ?: array();
 
