@@ -87,6 +87,7 @@ class MusicDistro_Band_Handler {
 	}
 
 
+	
 	/**
 	 * Get some bands (parent items)
 	 * 
@@ -108,10 +109,11 @@ class MusicDistro_Band_Handler {
 		}
 		
 		// grab all
-		return get_terms( array(
+		$bands = get_terms( array(
 			'taxonomy'		=> $this->tax_slug,
 			'hide_empty'	=> false,
 			'parent'		=> 0,
 		));
+		return $bands ?: array();
 	}
 }

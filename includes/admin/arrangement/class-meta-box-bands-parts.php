@@ -102,7 +102,6 @@ class MusicDistro_Meta_Box_Bands_Parts {
 		// get bands
 		$bands    = MusicDistro()->band->get_bands();
 		$selected = MusicDistro()->band->get_bands( $post_id );
-		$selected = $selected ?: array();
 
 		// build options
 		foreach ( $bands as $i => $band ) {
