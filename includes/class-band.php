@@ -18,15 +18,6 @@ class MusicDistro_Band_Handler {
 	 */
 	public $tax_slug = MD_CPT_PREFIX . 'band';
 
-	
-	/**
-	 * All bands transient
-	 *
-	 * @var string
-	 * @since 1.0.0
-	 */
-	public $t_all_bands = MD_T_PREFIX . 'all_bands';
-
 
 	/**
 	 * Primary class constructor.
@@ -35,13 +26,6 @@ class MusicDistro_Band_Handler {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_taxonomy' ) );
-		add_action( 'edited_terms', array( $this, 'reset_all_bands' ), 10, 2 );
-	}
-
-	public function reset_all_bands( $term_id, $taxonomy ) {
-		// d( 'YO WHATUP G' );
-		delete_transient( $this->t_all_bands );
-		error_log( 'LOOK AT THIS' );
 	}
 
 
@@ -123,22 +107,11 @@ class MusicDistro_Band_Handler {
 			return wp_get_post_terms( $post_id, $this->tax_slug, array( 'fields' => 'ids' ) );
 		}
 		
-
-		/**
-		 * Grab all, using transient if it's there
-		 */
-		$transient = get_transient( $this->t_all_bands );
-
-		if ( $transient ) {
-			return $transient;
-		}
-
-		$bands = get_terms( array(
+		// grab all
+		return get_terms( array(
 			'taxonomy'		=> $this->tax_slug,
 			'hide_empty'	=> false,
 			'parent'		=> 0,
 		));
-		set_transient( $this->t_all_bands, $bands );
-		return $bands;
 	}
 }
