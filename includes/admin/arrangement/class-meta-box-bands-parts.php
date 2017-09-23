@@ -100,13 +100,8 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	public function render_bands_field( $post_id ) {
 
 		// get bands
-		$tax      = MusicDistro()->band->tax_slug;
-		$bands    = get_terms( array(
-			'taxonomy'		=> $tax,
-			'hide_empty'	=> false,
-			'parent'		=> 0, 
-		));
-		$selected = wp_get_post_terms( $post_id, $tax, array( 'fields' => 'ids' ) );
+		$bands    = MusicDistro()->band->get_bands();
+		$selected = MusicDistro()->band->get_bands( $post_id );
 		$selected = $selected ?: array();
 
 		// build options
@@ -167,8 +162,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 		// 	return;
 		// }
 
-		// get default field list & meta prefix
-		$prefix = MusicDistro()->cpt_prefix;
+		// get default field list
 		$fields = $this->get_field_list();
 
 		/**
@@ -177,7 +171,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 		foreach ( $fields as $field ) {
 
 			// prefixed field name
-			$meta_name = $prefix . $field;
+			$meta_name = MD_CPT_PREFIX . $field;
 			
 			// check if something was put in
 			// if ( ! empty( $_POST[ $meta_name ] ) ) {

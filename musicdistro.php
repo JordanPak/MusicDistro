@@ -59,6 +59,15 @@ final class MusicDistro {
 
 
 	/**
+	 * Transient prefix
+	 *
+	 * @var string
+	 * @since 1.0.0
+	 */
+	public $t_prefix = 'musicdistro_';
+
+
+	/**
 	 * The arrangement handler instance
 	 *
 	 * @var object MusicDistro_Arrangement_Handler
@@ -137,6 +146,11 @@ final class MusicDistro {
 		// custom post type prefix
 		if ( ! defined( 'MD_CPT_PREFIX' ) ) {
 			define( 'MD_CPT_PREFIX', $this->cpt_prefix );
+		}
+
+		// transient prefix
+		if ( ! defined( 'MD_T_PREFIX' ) ) {
+			define( 'MD_T_PREFIX', $this->t_prefix );
 		}
 
 		// doing autosave?
