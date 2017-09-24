@@ -29,9 +29,44 @@ class MusicDistro_Band_Handler {
 
 		if ( is_admin() ) {
 			add_filter( "manage_edit-{$this->tax_slug}_columns", array( $this, 'edit_taxonomy_columns' ), 10, 1 );
-			add_action( "{$this->tax_slug}_edit_form_fields",    array( $this, 'add_instruments_field' ), 10, 2 );
+			add_action( "{$this->tax_slug}_edit_form_fields",    array( $this, 'add_instruments_field' ) );
+			add_action( "{$this->tax_slug}_add_form_fields",     array( $this, 'add_instruments_field' ) );
 		}
 	}
+
+
+	/**
+	 * Add instruments field
+	 *
+	 * @param object  $tag       current taxonomy term object
+	 * @param object  $taxonomy  current taxonomy slug
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_instruments_field() {
+
+		$instrument_slug = MusicDistro()->instrument->tax_slug;
+
+		$dropdown_args = array(
+			'hide_empty'	=> 0,
+			'taxonomy'		=> $instrument_slug,
+			'name'			=> 'md_instruments',
+			'id'			=> 'md_instruments',
+		);
+
+		// admin link
+		$link = admin_url( "edit-tags.php?taxonomy=$instrument_slug" );
+		?>
+
+		<div class="form-field md-instruments-wrap">
+			<label for="md_instruments"><?php _e( 'Instruments', 'musicdistro' ); ?></label>
+			<?php wp_dropdown_categories( $dropdown_args ); ?>
+
+			<p><a href="<?php echo $link; ?>" target="_blank"><?php _e( 'Add an instrument' ); ?></a></p>
+		</div>
+
+	<?php }
+
 
 
 	/**
@@ -45,7 +80,7 @@ class MusicDistro_Band_Handler {
 	 *
 	 * @since 1.0.0
 	 */ 
-	public function edit_taxonomy_columns( $content, $column_name, $term_id ) {
+	public function edit_taxonomy_columns( $content ) {
 		
 		// hide description
 		unset( $content['description']);
