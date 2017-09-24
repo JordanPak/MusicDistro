@@ -28,6 +28,7 @@ class MusicDistro_Band_Handler {
 
 		add_action( "init",                      array( $this, 'register_taxonomy' ) );
 		add_action( "created_{$this->tax_slug}", array( $this, 'save_instruments_field' ), 10, 1 );
+		add_action( "edited_{$this->tax_slug}",  array( $this, 'save_instruments_field' ), 10, 1 );
 
 		if ( is_admin() ) {
 			add_filter( "manage_edit-{$this->tax_slug}_columns", array( $this, 'edit_taxonomy_columns' ),  10, 1 );
@@ -236,6 +237,7 @@ class MusicDistro_Band_Handler {
 		// sanitize
 		$instruments = array_map( 'intval', $_POST['md_instruments'] );
 
-		add_term_meta( $term_id, 'md_instruments', $instruments );
+		// add or update
+		update_term_meta( $term_id, 'md_instruments', $instruments );
 	}
 }
