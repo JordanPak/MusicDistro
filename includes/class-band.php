@@ -162,23 +162,16 @@ class MusicDistro_Band_Handler {
 	 *
 	 * @since 1.0.0
 	 */
-	public function add_instruments_field() {
-
-		$instrument_slug = MusicDistro()->instrument->tax_slug;
-		$link            = admin_url( "edit-tags.php?taxonomy=$instrument_slug" );		
-		$dropdown_args   = array(
-			'hide_empty'	=> 0,
-			'taxonomy'		=> $instrument_slug,
-			'name'			=> 'md_instruments[]',
-			'id'			=> 'md_instruments',
-		);
-		?>
+	public function add_instruments_field() { ?>
 
 		<div class="form-field md-instruments-wrap">
-			<label for="md_instruments"><?php _e( 'Instruments', 'musicdistro' ); ?></label>
-			<?php wp_dropdown_categories( $dropdown_args ); ?>
 
-			<p><a href="<?php echo $link; ?>" target="_blank"><?php _e( 'Add an instrument' ); ?></a></p>
+			<label for="md_instruments"><?php _e( 'Instruments', 'musicdistro' ); ?></label>
+			<?php MusicDistro()->instrument->get_instruments( 'dropdown' ); ?>
+
+			<p><a href="<?php echo admin_url( "edit-tags.php?taxonomy=$instrument_slug" ); ?>" target="_blank">
+				<?php _e( 'Add an instrument' ); ?>
+			</a></p>
 		</div>
 
 	<?php }

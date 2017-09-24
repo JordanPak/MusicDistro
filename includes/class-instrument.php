@@ -95,15 +95,25 @@ class MusicDistro_Instrument_Handler {
      * If a band is provided, get the instruments already
      * associated with it. 
      *
-     * @param  int    $band  band term ID
+     * @param  mixed  $band  band term ID or 'dropdown' for wp_category dropdown with all instruments
      * @return array         all instruments, unless band is specified
      *
      * @since 1.0.0
      */
     public function get_instruments( $band = null ) {
 
+        // get all (in wp_category dropdown)
+        if ( $band == 'dropdown' ) {
+            return wp_dropdown_categories( array(
+                'hide_empty'	=> 0,
+                'taxonomy'		=> $this->tax_slug,
+                'name'			=> 'md_instruments[]',
+                'id'			=> 'md_instruments',
+            ));
+        }
+
         // get band's term meta
-        if ( $band ) {
+        elseif ( $band ) {
             $instruments = get_term_meta( $band, 'md_instruments', true );
             return $instruments ?: array();
         }
