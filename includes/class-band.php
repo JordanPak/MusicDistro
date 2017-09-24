@@ -31,9 +31,10 @@ class MusicDistro_Band_Handler {
 		add_action( "edited_{$this->tax_slug}",  array( $this, 'save_instruments_field' ), 10, 1 );
 
 		if ( is_admin() ) {
-			add_filter( "manage_edit-{$this->tax_slug}_columns", array( $this, 'edit_taxonomy_columns' ),  10, 1 );
-			add_action( "{$this->tax_slug}_edit_form_fields",    array( $this, 'edit_instruments_field' ), 10, 1 );
-			add_action( "{$this->tax_slug}_add_form_fields",     array( $this, 'add_instruments_field' ) );
+			add_filter( "manage_edit-{$this->tax_slug}_columns",  array( $this, 'edit_taxonomy_columns' ),         10, 1 );
+			add_filter( "manage_{$this->tax_slug}_custom_column", array( $this, 'edit_taxonomy_columns_content' ), 10, 3 );
+			add_action( "{$this->tax_slug}_edit_form_fields",     array( $this, 'edit_instruments_field' ),        10, 1 );
+			add_action( "{$this->tax_slug}_add_form_fields",      array( $this, 'add_instruments_field' ) );
 		}
 	}
 
@@ -101,15 +102,12 @@ class MusicDistro_Band_Handler {
 	/**
 	 * Manage admin taxonomy columns
 	 *
-	 * Hide the "Description" column and rename "Count" to
-	 * "Arrangements"
-	 *
 	 * @param  array  $content  band tax columns
 	 * @return array  $content  adjusted tax columns
 	 *
 	 * @since 1.0.0
 	 */ 
-	 public function edit_taxonomy_columns( $content ) {
+	public function edit_taxonomy_columns( $content ) {
 		
 		// hide description
 		unset( $content['description']);
@@ -117,7 +115,30 @@ class MusicDistro_Band_Handler {
 		// rename "Count" to "Arrangements"
 		$content['posts'] = __( 'Arrangements', 'musicdistro' );
 
+		// add instruments
+		$content['instruments'] = __( 'Instruments', 'musicdistro' );
+
 		return $content;
+	}
+
+
+	/**
+	 * Add instruments to taxonomy column
+	 *
+	 * @param  
+
+	 * @since 1.0.0
+	 */
+	public function edit_taxonomy_columns_content( $content, $column_name, $term_id ) {
+		// d( $content, $column_name, $term_id );
+
+		// sanity check
+		if ( $column_name !== 'instruments' ) {
+			return $content;
+		}
+
+		// get instrument list
+		MusicDistro()->instrument->get_list( $term_id, true );
 	}
 	
 

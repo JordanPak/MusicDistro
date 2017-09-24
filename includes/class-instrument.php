@@ -125,4 +125,46 @@ class MusicDistro_Instrument_Handler {
         ));
         return $instruments ?: array();
     }
+
+
+    
+    /**
+     * Get a band's list of instruments
+     *
+     * @param  int   $band   band term ID
+     * @param  bool  $links  wrap instrument name in edit link
+     * @param  bool  $echo   echo the list
+     * 
+     *
+     * @since 1.0.0
+     */
+    public function get_list( $band, $links = false, $echo = true ) {
+
+        // first, get the instruments & sanity check
+        $instruments = $this->get_instruments( $band );
+        if ( empty( $instruments ) ) return '';
+        
+        
+        // grab the term names & links
+        foreach ( $instruments as $i => &$instrument ) {
+
+            $term = get_term( $instrument, $this->tax_slug );
+            
+            if ( $links ) {
+                $link   = get_edit_term_link( $instrument, $this->tax_slug );
+                $list[] = "<a href='$link'>$term->name</a>";
+            } else {
+                $list[] = $term->name;
+            }
+        }
+
+        // build list
+        $list = musicdistro_build_ul( $list, 'md-instruments' );
+
+        if ( $echo ) {
+            echo $list;
+        } else {
+            return $list;
+        }
+    }
 }
