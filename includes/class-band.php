@@ -25,11 +25,13 @@ class MusicDistro_Band_Handler {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'register_taxonomy' ) );
+
+		add_action( "init",                      array( $this, 'register_taxonomy' ) );
+		add_action( "created_{$this->tax_slug}", array( $this, 'save_instruments_field' ), 10, 1 );
 
 		if ( is_admin() ) {
 			add_filter( "manage_edit-{$this->tax_slug}_columns", array( $this, 'edit_taxonomy_columns' ), 10, 1 );
-			add_action( "{$this->tax_slug}_edit_form_fields",    array( $this, 'add_instruments_field' ) );
+			// add_action( "{$this->tax_slug}_edit_form_fields",    array( $this, 'add_instruments_field' ) );
 			add_action( "{$this->tax_slug}_add_form_fields",     array( $this, 'add_instruments_field' ) );
 		}
 	}
@@ -50,7 +52,7 @@ class MusicDistro_Band_Handler {
 		$dropdown_args   = array(
 			'hide_empty'	=> 0,
 			'taxonomy'		=> $instrument_slug,
-			'name'			=> 'md_instruments',
+			'name'			=> 'md_instruments[]',
 			'id'			=> 'md_instruments',
 		);
 		?>
@@ -63,6 +65,28 @@ class MusicDistro_Band_Handler {
 		</div>
 
 	<?php }
+
+
+
+	/**
+	 * Save the instruments field
+	 *
+	 * @param int  $term_id  term ID
+	 *
+	 * @since 1.0.0
+	 */
+	public function save_instruments_field( $term_id ) {
+
+		// sanity check
+		if ( ! isset( $_POST['md_instruments'] ) || empty( $_POST['md_instruments'] ) ) {
+			return;
+		}
+
+		// sanitize
+		$instruments = array_map( 'intval', $_POST['md_instruments'] );
+
+		add_term_meta( $term_id, 'md_instruments', $instruments );
+	}
 
 
 
