@@ -125,7 +125,33 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 * @since 1.0.0
 	 */
 	public function render_parts_fields( $post_id ) {
-		// d( $post_id );
+
+		$i = 0;
+
+		// $instruments = wp_get_post_terms( $post_id, 'md_band', array()  );
+		$instruments = wp_get_object_terms( $post_id, 'md_band' );
+		foreach ( $instruments as $index => &$instrument ) {
+
+			if ( $instrument->parent === 0 ) {
+				unset( $instruments[ $index ] );
+			}
+		}
+		d( $instruments );
+
+		for ( $index = 0; $index < 5; $index++ ) {
+			?>
+
+			<fieldset>
+
+				<!-- instrument -->
+				<label for="md_<?php echo $index; ?>">Instrument</label><br />
+
+				<select id="md_parts_<?php echo $index; ?>" name="md_parts_1[]">
+
+				</select>
+
+			</fieldset>
+		<?php }
 	}
 
 
@@ -139,7 +165,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 	 */
 	public function save_meta_box( $post_id, $post ) {
 		
-		d( $post_id, $post, $_POST );
+		// d( $post_id, $post, $_POST );
 
 		// check nonce
 		if ( ! isset( $_POST[ $this->nonce ] ) || ! wp_verify_nonce( $_POST[ $this->nonce ], basename( __FILE__ ) ) ) {
@@ -174,7 +200,7 @@ class MusicDistro_Meta_Box_Bands_Parts {
 			
 			// check if something was put in
 			// if ( ! empty( $_POST[ $meta_name ] ) ) {
-				d( $_POST[ $meta_name ] );
+				// d( $_POST[ $meta_name ] );
 				
 				do_action( 'musicdistro_meta_box_save_' . $field, $post_id, $_POST[ $meta_name ] );
 
@@ -191,8 +217,8 @@ class MusicDistro_Meta_Box_Bands_Parts {
 		}
 
 
-		d( 'MADE IT!' );
-		die();
+		// d( 'MADE IT!' );
+		// die();
 	}
 
 
