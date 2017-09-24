@@ -85,17 +85,20 @@ class MusicDistro_Band_Handler {
 		$instruments = MusicDistro()->instrument->get_instruments();
 		$selected    = MusicDistro()->instrument->get_instruments( $term->term_id );
 
-		d( $term, $instruments, $selected );
+		// build options
+		foreach ( $instruments as $i => $instrument ) {
+			$is_selected = in_array( $instrument->term_id, $selected ) ? ' selected="selected"' : '';
+			$instruments[ $i ] = "<option value='{$instrument->term_id}'$is_selected>{$instrument->name}</option>";
+		}
 		?>
 
 		<tr class="form-field term-group-wrap">
 
 			<th scope="row"><label for="md_instruments"><?php _e( 'Instruments', 'musicdistro' ); ?></label></th>
 
-			<td>
-			
-			</td>
-
+			<td><select id="md_instruments" name="md_instruments[]" multiple="multiple">
+					<?php echo implode( '', $instruments ); ?>
+			</select></td>
 		</tr>
 
 	<?php }

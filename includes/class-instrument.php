@@ -104,7 +104,8 @@ class MusicDistro_Instrument_Handler {
 
         // get band's term meta
         if ( $band ) {
-           return get_term_meta( $band, 'md_instruments', true );
+            $instruments = get_term_meta( $band, 'md_instruments', true );
+            return $instruments ?: array();
         }
 
         // get all
