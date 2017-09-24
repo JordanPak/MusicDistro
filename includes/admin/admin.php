@@ -21,7 +21,10 @@ function musicdistro_is_admin_page() {
 
 	$post_type = get_post_type();
 
-	if ( is_admin() && $post_type == MusicDistro()->arrangement->cpt_slug ) {
+	if (
+		is_admin() && 
+		( $post_type == MusicDistro()->arrangement->cpt_slug || $post_type == MusicDistro()->instrument->cpt_slug )
+	) {
 		return true;
 	}
 

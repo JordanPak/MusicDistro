@@ -46,16 +46,13 @@ class MusicDistro_Band_Handler {
 	public function add_instruments_field() {
 
 		$instrument_slug = MusicDistro()->instrument->tax_slug;
-
-		$dropdown_args = array(
+		$link            = admin_url( "edit-tags.php?taxonomy=$instrument_slug" );		
+		$dropdown_args   = array(
 			'hide_empty'	=> 0,
 			'taxonomy'		=> $instrument_slug,
 			'name'			=> 'md_instruments',
 			'id'			=> 'md_instruments',
 		);
-
-		// admin link
-		$link = admin_url( "edit-tags.php?taxonomy=$instrument_slug" );
 		?>
 
 		<div class="form-field md-instruments-wrap">
