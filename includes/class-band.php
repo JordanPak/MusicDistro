@@ -205,7 +205,7 @@ class MusicDistro_Band_Handler {
 			<th scope="row"><label for="md_instruments"><?php _e( 'Instruments', 'musicdistro' ); ?></label></th>
 
 			<td><select id="md_instruments" name="md_instruments[]" multiple="multiple">
-					<?php echo implode( '', $instruments ); ?>
+				<?php echo implode( '', $instruments ); ?>
 			</select></td>
 		</tr>
 
