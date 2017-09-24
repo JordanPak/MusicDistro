@@ -68,8 +68,8 @@ class MusicDistro_Band_Handler {
 
 		$args = array(
 			'labels'                     => $labels,
-			'hierarchical'               => true,
-			'public'                     => true,
+			'hierarchical'               => false,
+			'public'                     => false,
 			'show_ui'                    => true,
 			'show_admin_column'          => true,
 			'show_in_nav_menus'          => false,

@@ -178,7 +178,7 @@ final class MusicDistro {
 			'functions',
 			'class-arrangement',
 			'class-band',
-			// 'class-instrument',
+			'class-instrument',
 		);
 
 
@@ -210,7 +210,7 @@ final class MusicDistro {
 		// global objects
 		$this->arrangement = new MusicDistro_Arrangement_Handler;
 		$this->band        = new MusicDistro_Band_Handler;
-		// $this->instrument  = new MusicDistro_Instrument_Handler;
+		$this->instrument  = new MusicDistro_Instrument_Handler;
 
 		// admin objects
 		if ( is_admin() ) {

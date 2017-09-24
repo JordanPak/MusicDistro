@@ -69,7 +69,7 @@ class MusicDistro_Instrument_Handler {
         $args = array(
             'labels'                     => $labels,
             'hierarchical'               => false,
-            'public'                     => true,
+            'public'                     => false,
             'show_ui'                    => true,
             'show_admin_column'          => true,
             'show_in_nav_menus'          => false,
