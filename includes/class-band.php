@@ -30,8 +30,8 @@ class MusicDistro_Band_Handler {
 		add_action( "created_{$this->tax_slug}", array( $this, 'save_instruments_field' ), 10, 1 );
 
 		if ( is_admin() ) {
-			add_filter( "manage_edit-{$this->tax_slug}_columns", array( $this, 'edit_taxonomy_columns' ), 10, 1 );
-			// add_action( "{$this->tax_slug}_edit_form_fields",    array( $this, 'add_instruments_field' ) );
+			add_filter( "manage_edit-{$this->tax_slug}_columns", array( $this, 'edit_taxonomy_columns' ),  10, 1 );
+			add_action( "{$this->tax_slug}_edit_form_fields",    array( $this, 'edit_instruments_field' ), 10, 1 );
 			add_action( "{$this->tax_slug}_add_form_fields",     array( $this, 'add_instruments_field' ) );
 		}
 	}
@@ -39,6 +39,8 @@ class MusicDistro_Band_Handler {
 
 	/**
 	 * Add instruments field
+	 *
+	 * Shown in NEW term entry
 	 *
 	 * @param object  $tag       current taxonomy term object
 	 * @param object  $taxonomy  current taxonomy slug
@@ -63,6 +65,38 @@ class MusicDistro_Band_Handler {
 
 			<p><a href="<?php echo $link; ?>" target="_blank"><?php _e( 'Add an instrument' ); ?></a></p>
 		</div>
+
+	<?php }
+
+
+
+	/**
+	 * Edit instruments field
+	 *
+	 * Shown in existing term's editor
+	 *
+	 * @param object  $term  current taxonomy term object
+	 *
+	 * @since 1.0,0
+	 */
+	public function edit_instruments_field( $term ) {
+
+		// get all (and selected) instruments
+		$instruments = MusicDistro()->instrument->get_instruments();
+		$selected    = MusicDistro()->instrument->get_instruments( $term->term_id );
+
+		d( $term, $instruments, $selected );
+		?>
+
+		<tr class="form-field term-group-wrap">
+
+			<th scope="row"><label for="md_instruments"><?php _e( 'Instruments', 'musicdistro' ); ?></label></th>
+
+			<td>
+			
+			</td>
+
+		</tr>
 
 	<?php }
 

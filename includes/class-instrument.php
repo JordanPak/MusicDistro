@@ -85,4 +85,33 @@ class MusicDistro_Instrument_Handler {
             $args
         );
     }
+
+    
+
+    /**
+     * Get some instruments
+     *
+     * If a band isn't provided, return all instruments.
+     * If a band is provided, get the instruments already
+     * associated with it. 
+     *
+     * @param  int    $band  band term ID
+     * @return array         all instruments, unless band is specified
+     *
+     * @since 1.0.0
+     */
+    public function get_instruments( $band = null ) {
+
+        // get band's term meta
+        if ( $band ) {
+           return get_term_meta( $band, 'md_instruments', true );
+        }
+
+        // get all
+        $instruments = get_terms( array(
+            'taxonomy'      => $this->tax_slug,
+            'hide_empty'    => false,
+        ));
+        return $instruments ?: array();
+    }
 }
