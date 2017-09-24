@@ -108,9 +108,10 @@ class MusicDistro_Band_Handler {
 	 * @since 1.0.0
 	 */ 
 	public function edit_taxonomy_columns( $content ) {
-		
-		// hide description
-		unset( $content['description']);
+
+		// hide description & slug
+		unset( $content['description'] );
+		unset( $content['slug'] );
 
 		// rename "Count" to "Arrangements"
 		$content['posts'] = __( 'Arrangements', 'musicdistro' );
@@ -130,7 +131,6 @@ class MusicDistro_Band_Handler {
 	 * @since 1.0.0
 	 */
 	public function edit_taxonomy_columns_content( $content, $column_name, $term_id ) {
-		// d( $content, $column_name, $term_id );
 
 		// sanity check
 		if ( $column_name !== 'instruments' ) {
